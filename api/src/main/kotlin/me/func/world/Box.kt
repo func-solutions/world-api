@@ -9,20 +9,20 @@ import java.util.function.BiConsumer
 import java.util.function.Consumer
 
 class Box(
-    private val container: Area,
-    private val min: Location,
-    private val max: Location,
+    val container: Area,
+    val min: Location,
+    val max: Location,
     override val name: String,
     override val tag: String
 ) : Area {
-    private val dimensions: Triple<Double, Double, Double> = Triple(
+    val dimensions: Triple<Double, Double, Double> = Triple(
         max.x - min.x,
         max.y - min.y,
         max.z - min.z
     )
 
     override val labels: MutableList<Label>
-    private val meta: Map<String, Any>? = null
+    val meta: Map<String, Any>? = null
 
     fun expandVert(): Box {
         min.setY(0.0)
