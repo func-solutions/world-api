@@ -1,4 +1,4 @@
-# Cristalix World API DOCS (актуальная версия 1.0.5)
+# Cristalix World API DOCS (актуальная версия 1.0.6)
 
 <h2>Как подключить?</h2>
 
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'me.func:world-api:1.0.5'
+    implementation 'me.func:world-api:1.0.6'
 }
 ```
 

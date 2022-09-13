@@ -7,6 +7,7 @@ import org.bukkit.Location
 import org.bukkit.World
 import ru.cristalix.core.formatting.Color
 import ru.cristalix.core.math.V3
+import kotlin.math.floor
 
 fun V3.toLocation(world: World) = Location(world, x, y, z)
 
@@ -18,6 +19,10 @@ fun Location.orientation(): Orientation {
 }
 
 fun Location.position() = BlockPosition(x, y, z)
+
+fun Location.center() = Location(world, floor(x) + 0.5, floor(y), floor(z) + 0.5, yaw, pitch)
+
+fun Location.cubeCenter() = Location(world, floor(x) + 0.5, floor(y) + 0.5, floor(z) + 0.5, yaw, pitch)
 
 fun applyColor(data: IBlockData, color: Color?): IBlockData {
     val block = data.block
