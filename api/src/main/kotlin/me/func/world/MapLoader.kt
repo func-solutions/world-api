@@ -1,8 +1,6 @@
 package me.func.world
 
-import org.bukkit.World
 import ru.cristalix.core.map.BukkitWorldLoader
-import ru.cristalix.core.map.LoadedMap
 import ru.cristalix.core.map.MapService
 import java.util.concurrent.TimeUnit
 
@@ -15,14 +13,17 @@ object MapLoader {
         name: String,
         timeUnit: TimeUnit = TimeUnit.SECONDS,
         wait: Int = 15,
-    ): LoadedMap<World> {
-        return try {
-            mapService.loadMap(
+    ): WorldMeta {
+        try {
+
+            val loaded = mapService.loadMap(
                 mapService.getLatestMapByGameTypeAndMapName(type, name)
                     .orElseThrow { RuntimeException("Map download failure. $type/$name") }
                     .latest,
                 BukkitWorldLoader.INSTANCE
             )[wait.toLong(), timeUnit]
+            return WorldMeta(loaded)
+
         } catch (throwable: Throwable) {
             throw RuntimeException("Map get latest failure. $type/$name", throwable)
         }
