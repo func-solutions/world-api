@@ -16,11 +16,28 @@ class WorldMeta(private val cristalixMap: LoadedMap<World>) : Area {
 
     override fun contains(location: Location?) = location?.world == world
 
-    fun label(key: String) = getLabel(key)
+    @JvmOverloads
+    fun label(key: String, offsetX: Double = 0.0, offsetY: Double = 0.0, offsetZ: Double = 0.0) = getLabel(key)?.apply {
+        x += offsetX
+        y += offsetY
+        z += offsetZ
+    }
 
-    fun labels(key: String) = getLabels(key)
+    @JvmOverloads
+    fun labels(key: String, offsetX: Double = 0.0, offsetY: Double = 0.0, offsetZ: Double = 0.0) =
+        getLabels(key).onEach {
+            it.x += offsetX
+            it.y += offsetY
+            it.z += offsetZ
+        }
 
-    fun labels(key: String, tag: String) = getLabels(key, tag)
+    @JvmOverloads
+    fun labels(key: String, tag: String, offsetX: Double = 0.0, offsetY: Double = 0.0, offsetZ: Double = 0.0) =
+        getLabels(key, tag).onEach {
+            it.x += offsetX
+            it.y += offsetY
+            it.z += offsetZ
+        }
 
     fun box(key: String, tag: String) = getBox(key, tag)
 
