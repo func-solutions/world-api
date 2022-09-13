@@ -10,7 +10,7 @@ plugins {
 }
 
 allprojects {
-    group = "me.func.world-api"
+    group = "me.func"
     version = "1.0.0"
 }
 
