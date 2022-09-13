@@ -5,6 +5,7 @@ import net.minecraft.server.v1_12_R1.IBlockData
 import org.bukkit.Location
 import org.bukkit.craftbukkit.v1_12_R1.CraftWorld
 import org.bukkit.entity.Entity
+import ru.cristalix.core.math.V3
 import java.util.function.BiConsumer
 import java.util.function.Consumer
 
@@ -15,7 +16,7 @@ class Box(
     override val name: String,
     override val tag: String
 ) : Area {
-    val dimensions: Triple<Double, Double, Double> = Triple(
+    val dimensions: V3 = V3(
         max.x - min.x,
         max.y - min.y,
         max.z - min.z
@@ -54,8 +55,8 @@ class Box(
             min.z + (max.z - min.z) / 2
         )
 
-    fun toRelativeVector(location: Location): Triple<Double, Double, Double> {
-        return Triple(
+    fun toRelativeVector(location: Location): V3 {
+        return V3(
             location.getX() - min.x,
             location.getY() - min.y,
             location.getZ() - min.z
@@ -95,14 +96,14 @@ class Box(
         }
     }
 
-    fun forEach(action: Consumer<Triple<Double, Double, Double>>) {
+    fun forEach(action: Consumer<V3>) {
         var x = min.getX()
         while (x <= max.getX()) {
             var y = min.getY()
             while (y <= max.getY()) {
                 var z = min.getZ()
                 while (z <= max.getZ()) {
-                    action.accept(Triple(x, y, z))
+                    action.accept(V3(x, y, z))
                     z++
                 }
                 y++
@@ -112,20 +113,20 @@ class Box(
     }
 
     fun transpose(
-        absoluteOrigin: Triple<Double, Double, Double>,
+        absoluteOrigin: V3,
         orientation: Orientation,
-        relativeOrigin: Triple<Double, Double, Double>,
+        relativeOrigin: V3,
         x: Int, y: Int, z: Int
     ): Location {
-        val newX = x - min.getX() - relativeOrigin.first
-        val newY = y - min.getY() - relativeOrigin.second
-        val newZ = z - min.getZ() - relativeOrigin.third
+        val newX = x - min.getX() - relativeOrigin.x
+        val newY = y - min.getY() - relativeOrigin.y
+        val newZ = z - min.getZ() - relativeOrigin.z
         var tx: Double = (if (orientation.swap) newZ else newX) * orientation.factor
         var ty = newY
         var tz: Double = (if (orientation.swap) -newX else newZ) * orientation.factor
-        tx += absoluteOrigin.first
-        ty += absoluteOrigin.second
-        tz += absoluteOrigin.third
+        tx += absoluteOrigin.x
+        ty += absoluteOrigin.y
+        tz += absoluteOrigin.z
         return Location(world, tx, ty, tz)
     }
 
