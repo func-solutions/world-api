@@ -1,4 +1,4 @@
-# Cristalix World API DOCS (актуальная версия 1.0.7)
+# Cristalix World API DOCS (актуальная версия 1.0.8)
 
 <h2>Как подключить?</h2>
 
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'me.func:world-api:1.0.7'
+    implementation 'me.func:world-api:1.0.8'
 }
 ```
 
@@ -30,3 +30,14 @@ dependencies {
 1. Мир - `worldMeta.getWorld()`
 2. табличку с карты (есть версия со списком) - `worldMeta.label(key: String, tag: String)` 
 3. Выделение области двумя точками (есть версия со списком) - `worldMeta.box(key: String, tag: String)` 
+
+<h3>Утилита для поворотов Rotation</h3>
+
+```kotlin
+val rotated = Rotation.rotate(
+    30.0, // на какой угол поворачиваем
+    V3(0.0, 1.0, 0.0), // ось поворота (вокруг какого вектора мы крутим, тут вектор смотрит вверх) (красным)
+    V3(5.0, 0.0, 0.0) // координаты точки поворота (зеленым)
+)
+```
+
