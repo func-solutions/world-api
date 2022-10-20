@@ -1,4 +1,4 @@
-# Cristalix World API DOCS (актуальная версия 1.0.7)
+# Cristalix World API DOCS (актуальная версия 1.0.9)
 
 <h2>Как подключить?</h2>
 
@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'me.func:world-api:1.0.8'
+    implementation 'me.func:world-api:1.0.9'
 }
 ```
 
@@ -43,7 +43,7 @@ dependencies {
 
 ```kotlin
 val rotated = Rotation.rotate(
-    30.0, // на какой угол поворачиваем
+    30.0, // на какой угол поворачиваем ГРАДУСЫ
     V3(0.0, 1.0, 0.0), // ось поворота (вокруг какого вектора мы крутим, тут вектор смотрит вверх) (красным)
     V3(5.0, 0.0, 0.0) // координаты точки поворота (зеленым)
 )
