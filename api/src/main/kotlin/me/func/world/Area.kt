@@ -19,9 +19,11 @@ interface Area {
 
     fun getLabel(name: String) = labels.firstOrNull { it.name == name }
 
+    fun getLabel(name: String, tag: String) = getLabels(name).firstOrNull { it.tag == tag }
+
     fun requireLabel(name: String): Label? {
         var result: Label? = null
-        for (label: Label in labels) {
+        for (label in labels) {
             if (label.name != name) continue
             if (result != null) throw RuntimeException(
                 "Duplicate label " + name + " inside box " + this.name + "/" + tag +
@@ -39,8 +41,9 @@ interface Area {
             .map { e -> findBoxSmart(e.value, name, e.key) }
             .collect(Collectors.toMap({ box -> box?.tag }) { box: Box? -> box!! })
 
-    fun getBox(name: String, tag: String) =
-        findBoxSmart(getLabels(name, tag), name, tag)
+    fun getBox(name: String, tag: String) = findBoxSmart(getLabels(name, tag), name, tag)
+
+    fun getBox(name: String) = getBox(name, "")
 
     fun findBoxSmart(labels: List<Label>, name: String, tag: String): Box {
         if (labels.isEmpty()) throw RuntimeException("Box " + name + "/" + tag + " wasn't found on " + this.name)
