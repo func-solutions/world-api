@@ -27,7 +27,7 @@ data class WorldMeta(
                 }.flatten()
             )
 
-    override val labels: MutableList<Label> = ArrayList()
+    override val labels: MutableList<Label> = points.toMutableList()
     override val tag: String
         get() = ""
 
